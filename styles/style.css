@@ -1,0 +1,193 @@
+html, body {
+  background-color: #111111;
+  margin: 0px auto;
+
+  font-family: sans-serif;
+}
+
+.menu {
+  background-color: #111111;
+  margin: 20px auto;
+  font-family: "Arial Rounded MT Bold";
+  text-align: center;
+  color: #EEEEEE;
+  width: 98%;
+  height: 400px;
+  vertical-align: middle;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #111111;
+  border-radius: 10px;
+}
+
+.menu a {
+  color: white;
+  text-decoration: none;
+  line-height: 450px;
+  font-size: 3rem;
+}
+
+canvas {
+  /*background-color: #00000F;*/
+  display: block;
+  margin: 20px auto;
+  margin: 10px auto;
+  border-style: solid;
+  border-width: 4px;
+  border-color: #444444;
+  border-radius: 10px;
+}
+
+.sideBar {
+  position: fixed;
+  float: left;
+  text-align: left;
+  margin: 10px;
+  background-color: #111111;
+  color: #EEEEEE;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #111111;
+  width: 150px;
+  height: 400px;
+}
+
+.sideBar p {
+  color: #EEEEEE;
+  font-family: Arial Black;
+  margin-left: 4px;
+}
+
+#console {
+  color: #EEEEEE;
+  background-color: #11111F;
+  margin: 0px auto;
+  text-align: center;
+  width: 400px;
+  height: 20px;
+  border-radius: 8px;
+}
+
+.help {
+  color: #44CCFF;
+  background-color: #11111F;
+  margin: 30px auto;
+  text-align: center;
+  width: 98%;
+  height: 80px;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 8px;
+  border-color: #11111F;
+  font-size: 12px;
+  line-height: 1;
+}
+
+div {}
+
+.grid {}
+
+.hero {}
+
+.brick {}
+
+.text {
+  color: #EEEEEE;
+  font-size: 1rem;
+}
+
+.text-centered {
+  text-align: center;
+}
+
+input {
+  margin: 20px auto;
+  display: inline-block;
+  background: #111111;
+  color: white;
+}
+
+.preInput {
+  position: relative;
+  margin-left: 1px;
+  float: left;
+  background: white;
+  width:20px;
+  color: white;
+}
+
+.terminal {
+  position: fixed;
+  width: 200px;
+  height: 500px;
+  left: 20px;
+  margin: 10px auto;
+  font-family: sans-serif;
+  float: left;
+  background: #111111;
+  color: white;
+  padding: 10px;
+  overflow: auto;
+}
+
+.terminalInput {
+  /*position: relative;*/
+  /*float: left;*/
+  width: 170px;
+  height: 20px;
+  margin-left: 10px;
+  margin-top: -20px;
+  margin-bottom: 10px;
+  background-color: transparent;
+  border-style: none;
+  font-size: 12px;
+  color: #00AAFF;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
+
+textArea {
+  position: fixed;
+  width: 200px;
+  height: 550px;
+  left: 20px;
+  margin: 10px;
+  margin-top: 5px;
+  display: block;
+  float: left;
+  background: #000000;
+  color: #00AA00;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #222222;
+  opacity: 0.9;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 16px;
+}
+
+#playerDataHolder {
+  color: #EEEEEE;
+  background-color: #111111;
+  margin: 0px auto;
+  text-align: center;
+  width: 400px;
+  height: 40px;
+  border-radius: 8px;
+}
+
+input {
+  /*margin-left: 10px;*/
+}
+
+text {
+  position: relative;
+  right: -400px;
+  background: black;
+  color: green;
+  float: right;
+}
