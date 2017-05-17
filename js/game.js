@@ -32,6 +32,8 @@ var particles = [];
 var numParticles = 40;
 var maxSpeed = 10;
 var switchDepth = false;
+var enemy;
+var _width;
 
 var addParticles = false;
 
@@ -233,6 +235,7 @@ window.onload = function() {
 
 
     drawEntities();
+
     updateHeroPosition();
 
     if (!switchDepth) {
@@ -299,9 +302,9 @@ window.onload = function() {
   // another type of collision detection, based on entity's position
   function checkCollisionBetweenHeroAndEnemy() {
     for (var i = 0; i < factory.enemiesArray.length; i++) {
-      var enemy = factory.enemiesArray[i];
+      enemy = factory.enemiesArray[i];
 
-      var _width = settings.gridSize;
+      _width = settings.gridSize;
 
       if (enemy.isActive && !enemy.isHit) {
         if (hero.x < enemy.x + _width && hero.x + _width > enemy.x &&
@@ -318,8 +321,8 @@ window.onload = function() {
   function checkCollisionBetweenEnemyAndBase() {
     for (var i = 0; i < factory.enemiesArray.length; i++) {
 
-      var enemy = factory.enemiesArray[i];
-      var _width = settings.gridSize;
+      enemy = factory.enemiesArray[i];
+      _width = settings.gridSize;
 
       if (enemy.isActive && !enemy.isHit) {
 
@@ -386,21 +389,19 @@ window.onload = function() {
               delete particles[i];
             }
           }
+
           particles = [];
           for (var i = 0; i < numParticles; i += 1) {
             // particles.push(particle.create(200, 200, Math.random() * maxSpeed + 2, Math.random() * Math.PI * 2));
             particles[i] = particle.create(enemy.x, enemy.y, Math.random() * maxSpeed + 2, Math.random() * Math.PI * 2);
 
           }
-          addParticles = true;
 
+          addParticles = true;
 
           sound.playHit();
           var rndm = Math.floor( ( Math.random() * 500 ) + 40 );
           //output.push( rndm = rndm - (rndm % multiplier) );
-
-
-
 
           canvas.context.strokeStyle = "#111111";
           rndm = rndm - (rndm % settings.GRID_SIZE)
