@@ -27,6 +27,12 @@ const EnemyManager = {
 
   },
 
+  removeEnemies : function () {
+    for (var i = 0; i < factory.enemiesArray.length; i++) {
+      factory.enemiesArray[i].isActive = false;
+    }
+  },
+
   advance: function(enemy) {
     // this.numActiveEnemies += 1;
     // for(var i = 0; i < factory.enemiesArray.length; i ++) {

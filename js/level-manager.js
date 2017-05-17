@@ -29,7 +29,7 @@ var levelManager = {
 
         if (map[i][j] == 1) {
 
-          factory.brickArray[brickIndex].add(4 + (settings.GRID_SIZE + padding) * j, xStart + (settings.GRID_SIZE + padding) * i, 40, 40);
+          factory.brickArray[brickIndex].add(0 + (settings.GRID_SIZE + padding) * j, 0 + (settings.GRID_SIZE + padding) * i, 40, 40);
           // factory.brickArray[brickIndex].add( (settings.GRID_SIZE + 1) * j, (settings.gridSize));
           factory.brickArray[brickIndex].draw();
           brickIndex++;
@@ -46,7 +46,7 @@ var levelManager = {
 
         if (map[i][j] == 2) {
 
-          hero = Hero.create(xStart + (settings.GRID_SIZE + padding) * j, xStart + (settings.GRID_SIZE + padding) * i, i, j);
+          hero = Hero.create(0 + (settings.GRID_SIZE + padding) * j, 0 + (settings.GRID_SIZE + padding) * i, i, j);
           hero.draw();
           hero.originY = hero.y;
         }

@@ -5,15 +5,15 @@ var factory = {
   coinsArray: [],
   enemiesArray: [],
 
-  createGridEntities: function(numberOfGridEntites = 500) {
+  createGridEntities: function(numberOfGridEntites = 10) {
     for (var i = 0; i < numberOfGridEntites; i++) {
       var gridEntity = new GridEntity();
       this.gridArray.push(gridEntity);
     }
   },
 
-  createBricks: function(numBricks = 4) {
-    for (var i = 0; i < 100; i++) {
+  createBricks: function(numBricks = 11) {
+    for (var i = 0; i < numBricks; i++) {
       var brick = new Brick();
       this.brickArray.push(brick);
     }
@@ -26,7 +26,7 @@ var factory = {
     }
   },
 
-  createEnemies: function (numberOfEnemies = 100) {
+  createEnemies: function (numberOfEnemies = 4) {
     for (var i = 0; i < numberOfEnemies; i++) {
       var enemy = new Enemy();
       this.enemiesArray.push(enemy);

@@ -252,10 +252,10 @@ window.onload = function() {
       // if (factory.coinsArray[i] != null) {
       //   factory.coinsArray[i].draw();
       // }
-
-      if (factory.brickArray[i] != null) {
-        factory.brickArray[i].draw(insaneMode);
-      }
+      //
+      // if (factory.brickArray[i] != null) {
+      //   factory.brickArray[i].draw(insaneMode);
+      // }
 
       if (factory.enemiesArray[i] != null) {
         factory.enemiesArray[i].draw();
@@ -359,10 +359,6 @@ window.onload = function() {
 
   function update() {
 
-
-
-
-
     if (gameState == 1) {
       draw(); // always draw, Pablo Picasso ;)
 
@@ -440,6 +436,7 @@ window.onload = function() {
         EnemyManager.update();
 
         if(health <= 0) {
+          EnemyManager.removeEnemies();
           consoleMessage = "You lose. Click 'Reset game' to replay";
         }
 
@@ -463,7 +460,6 @@ window.onload = function() {
     }
     //requestAnimationFrame(update);
   }
-
 
   function updateTexts() {
     // utility.getElement("score-txt").innerHTML = "Score " + global.score;
