@@ -12,7 +12,7 @@ var factory = {
     }
   },
 
-  createBricks: function(numBricks = 100) {
+  createBricks: function(numBricks = 4) {
     for (var i = 0; i < 100; i++) {
       var brick = new Brick();
       this.brickArray.push(brick);

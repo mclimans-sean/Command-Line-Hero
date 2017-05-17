@@ -8,21 +8,11 @@ function Brick() {
   this.isActive = false;
   this.indexColor = 0;
   this.color = "#111111";
+  this.removed = false;
 
   this.draw = function(change_color = false) {
     if (this.isActive) {
-      //var gridSize = canvas.width / global.map[0].length ;
-      // if (change_color) {
-      //   //this.color = settings.BRICK_COLOR_ARRAY[this.indexColor];
-      //   //this.indexColor += 1;
-      //   this.color = utility.getRandomColor();
-      //   if (this.indexColor > settings.BRICK_COLOR_ARRAY.length - 1) {
-      //     this.indexColor = 0;
-      //   }
-      // } else {
-      //   //this.color = settings.BRICK_COLOR;
-      //   this.color = settings.BRICK_COLOR;
-      // }
+
       canvas.context.strokeStyle = this.color;
       canvas.context.strokeRect(this.x, this.y, settings.gridSize, settings.gridSize);
       canvas.context.stroke();

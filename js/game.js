@@ -246,9 +246,9 @@ window.onload = function() {
     for (var i = 0; i < factory.brickArray.length; i++) {
       //  factory.gridArray[i].draw();
 
-      if (factory.coinsArray[i] != null) {
-        factory.coinsArray[i].draw();
-      }
+      // if (factory.coinsArray[i] != null) {
+      //   factory.coinsArray[i].draw();
+      // }
 
       if (factory.brickArray[i] != null) {
         factory.brickArray[i].draw(insaneMode);
@@ -327,7 +327,7 @@ window.onload = function() {
 
           var basePart = factory.brickArray[j];
 
-          if (basePart.isActive) {
+          if (basePart.isActive && !basePart.removed) {
 
             if (basePart.x < enemy.x + _width && basePart.x + _width > enemy.x &&
               basePart.y < enemy.y + _width && basePart.y + _width > enemy.y) {
@@ -429,18 +429,18 @@ window.onload = function() {
           // factory.brickArray.splice(0, 1);
           if(health > 0) {
             health--;
-          } else {
-            consoleMessage = "You lose";
           }
+
           //basePart.isActive = false;
           basePart.deactivate();
+          basePart.removed = true;
         }
 
         EnemyManager.update();
 
-
-
-
+        if(health <= 0) {
+          consoleMessage = "You lose. Click 'Reset game' to replay";
+        }
 
         if (gameState == 1) {
           global.time++;
