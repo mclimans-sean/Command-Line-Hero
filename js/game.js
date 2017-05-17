@@ -35,13 +35,11 @@ var switchDepth = false;
 
 var addParticles = false;
 
-var gaps = [];
-
 window.onload = function() {
 
-  factory.createGridEntities();
+  // factory.createGridEntities();
   factory.createBricks();
-  factory.createCoins();
+//  factory.createCoins();
   factory.createEnemies();
   canvas.init();
   levelManager.buildStage(stages[0]);
@@ -65,19 +63,7 @@ window.onload = function() {
 
   var moveRight = function() {
     sound.playWhip();
-    // var flag = false;
-    // for (var i = 0; i < gaps.length; i++) {
-    //   if(hero.x > gaps[i] + settings.gridSize) {
-    //     flag = false;
-    //   } else {
-    //     flag = true;
-    //     break;
-    //   }
-    // }
-
-    // if(!flag) {
-      xSpeed = 10;
-    // }
+    xSpeed = 10;
   }
 
   var moveUp = function() {
@@ -441,10 +427,13 @@ window.onload = function() {
           //enemy.isHit = true;
           //  enemy.hit(10);
           // factory.brickArray.splice(0, 1);
-          health--;
+          if(health > 0) {
+            health--;
+          } else {
+            consoleMessage = "You lose";
+          }
           //basePart.isActive = false;
           basePart.deactivate();
-          gaps.push(basePart.x);
         }
 
         EnemyManager.update();
@@ -457,7 +446,7 @@ window.onload = function() {
           global.time++;
         }
 
-        updateInsanelMode();
+        //updateInsanelMode();
         updateTexts();
 
         if (isAttack) {
@@ -474,17 +463,6 @@ window.onload = function() {
     //requestAnimationFrame(update);
   }
 
-  function gotoNextLevel() {
-    anim.fadeIn(utility.getElement("canvas"));
-    canvas.context.clearRect(0, 0, canvas.width, canvas.height);
-    levelManager.currentLevelIndex++;
-    levelManager.currentLevelIndex %= stages.length; // clear expression to repeat levels once you exceed the final stage
-    levelManager.buildStage(stages[levelManager.currentLevelIndex]);
-  }
-
-  function checkGridVal(gridVal) {
-    return levelManager.getMapIndex(hero.row, hero.col) == gridVal;
-  }
 
   function updateTexts() {
     // utility.getElement("score-txt").innerHTML = "Score " + global.score;
@@ -505,11 +483,7 @@ window.onload = function() {
         inputs[lineIndex].value = isCommandExist[1];
         currentString = isCommandExist[1];
       }
-      // console.log("First letter of current command " , inputs[lineIndex].value);
-      // var inputs[lineIndex][0] ==
 
-      // console.log("tap ", String.fromCharCode(event.charCode));
-      //
     }
 
     if (event.keyCode == 38) { // pressed up
@@ -564,29 +538,3 @@ window.onload = function() {
   });
 
 }
-
-
-
-
-
-
-
-
-//
-// update();
-//
-// function update () {
-//   context.clearRect(0, 0, width, height);
-//
-//   for(var i = 0; i < numParticles; i += 1) {
-//     var p = particles[i];
-//     p.update();
-//     context.fillStyle = particleColor;
-//     context.beginPath();
-//     context.arc(p.position.getX(), p.position.getY(), particleRadius, 0, Math.PI * 2, false);
-//     context.fill();
-//
-//   }
-//
-//   requestAnimationFrame(update);
-// }
