@@ -7,8 +7,6 @@ var heroEnemyCollisionResult = undefined;
 var enemyBaseCollisionResult = undefined;
 var isFreezing = false;
 var insaneMode = false;
-var isChangeLevel = false;
-var switchDepth = false;
 var allowMove = true;
 var xSpeed = 0;
 var ySpeed = 0;
@@ -33,6 +31,7 @@ var health = 0;
 var particles = [];
 var numParticles = 40;
 var maxSpeed = 10;
+var switchDepth = false;
 
 var addParticles = false;
 

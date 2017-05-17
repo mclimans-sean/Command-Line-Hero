@@ -173,11 +173,14 @@ textArea {
 #playerDataHolder {
   color: #EEEEEE;
   background-color: #111111;
-  margin: 0px auto;
   text-align: center;
-  width: 400px;
+  width: 200px;
   height: 40px;
-  border-radius: 8px;
+  float: right;
+  right: 100px;
+  bottom: 540px;
+  position: fixed;
+  text-align: left;
 }
 
 input {
@@ -190,4 +193,12 @@ text {
   background: black;
   color: green;
   float: right;
+}
+
+button {
+  float: right;
+  right: 100px;
+  bottom: 540px;
+  position: fixed;
+
 }
