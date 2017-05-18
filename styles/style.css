@@ -217,8 +217,9 @@ button {
   position: absolute;
   font-family: sans-serif;
   color: "#999999";
-  right: 300px;
-  bottom: 20px;
+  right: 540px;
+  bottom: 300px;
   font-size: 16px;
+  font-weight: bold;
   display: none;
 }

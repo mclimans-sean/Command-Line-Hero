@@ -96,6 +96,10 @@ window.onload = function() {
     xSpeed = -10;
   }
 
+  var up = function () {
+    attack = true;
+  }
+
   var moveRight = function() {
     sound.playWhip();
     xSpeed = 10;
@@ -146,9 +150,9 @@ window.onload = function() {
     }
   }
 
-  var attack = function() {
-    attack = true;
-  }
+  // var attack = function() {
+  //   attack = true;
+  // }
 
   var help = function() {
     for(var i = 0; i < helpCommands.length + 1; i ++) {
@@ -165,12 +169,12 @@ window.onload = function() {
 
   command.left = moveLeft;
   command.right = moveRight;
-  command.up = moveUp;
+  command.up = up;
   command.down = moveDown;
   command.clear = clear;
   command.pause = pause;
   command.slow = slow;
-  command.attack = attack;
+  // command.attack = attack;
   command.help = help;
 
   heroStepLength = settings.gridSize + canvas.padding;
@@ -618,7 +622,7 @@ window.onload = function() {
       }
 
 
-      if (currentString == "attack" && !isAttack) {
+      if (currentString == "up" && !isAttack) {
         isAttack = true;
         targetY = hero.y - (Math.abs(hero.y - 0));
       }

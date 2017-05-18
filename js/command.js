@@ -1,6 +1,6 @@
 var command = {
 
-  commands : ["left", "right", "up", "down", "clear", "help", "ls", "pause", "history", "slow", "attack", "reset"],
+  commands : ["left", "right", "up", "down", "clear", "help", "ls", "pause", "history", "slow", "reset"],
   currentCommand: "",
   historyList: [],
 
@@ -40,12 +40,8 @@ var command = {
 
   },
 
-  attack : function () {
-
-  },
-
   reset : function () {
-    
+
   },
 
   history : function () {
