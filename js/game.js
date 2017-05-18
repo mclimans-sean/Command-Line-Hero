@@ -36,8 +36,7 @@ var enemy;
 var _width;
 var isEnemyReachedBottomResult = false;
 var addParticles = false;
-var helpCommands = ["left: move left", "right: move right", "attack: jump and attack", "clear: clear commands",
-"press TAB to auto complete", "help: get help"];
+var helpCommands = [];
 
 var messages = ["Awesome", "Great", "Maniac", "Woooaaaha"];
 
@@ -51,6 +50,36 @@ window.onload = function() {
   levelManager.buildStage(stages[0]);
 
 
+
+
+
+  // testing server request
+
+
+  utility.getElement("preloader").innerHTML = "Loading help commands...";
+  utility.getElement("preloader").style.display = "block";
+
+  $.getJSON("https://cors-anywhere.herokuapp.com/fhdhaidari.com/clih/help.php", function(result){
+
+    //console.log("Result === " , result[0]["right"]);
+
+
+    var key = Object.keys(result[0]);
+
+    //console.log("Key 1 " , key[1]);
+
+    for(var i = 0; i < Object.keys(result[0]).length; i ++) {
+      helpCommands.push(key[i] + " : " + result[0][key[i]]);
+    }
+
+    //console.log(helpCommands.toString());
+   utility.getElement("preloader").style.display = "none";
+    //anim.fadeOut("preloader");
+
+  });
+
+
+  ////////////////////////////
 
   // // creating the particles
   for (var i = 0; i < numParticles; i += 1) {
@@ -402,6 +431,8 @@ window.onload = function() {
     if (gameState == 1) {
       draw(); // always draw, Pablo Picasso ;)
 
+      updateTexts();
+
 
       updateTimeMessage();
 
@@ -470,7 +501,7 @@ window.onload = function() {
 
         if (health <= 0) {
           EnemyManager.removeEnemies();
-          consoleMessage = "You lose. Use the 'reset' command to replay";
+          consoleMessage = "You lose. Type the 'reset' command to replay";
           global.time = 0;
 
         }
@@ -480,7 +511,6 @@ window.onload = function() {
         }
 
         //updateInsanelMode();
-        updateTexts();
 
         if (isAttack) {
           // console.log("attacking");
@@ -510,7 +540,9 @@ window.onload = function() {
  }
 
   function updateTexts() {
+
     // utility.getElement("score-txt").innerHTML = "Score " + global.score;
+    // utility.getElement("score-txt").innerHTML = "Score: " + Math.round(global.time / 100);
     utility.getElement("score-txt").innerHTML = "Score: " + Math.round(global.time / 100);
     // utility.getElement("base-health-text").innerHTML = "Health: " + health;
     utility.getElement("console").innerHTML = consoleMessage;
@@ -556,10 +588,10 @@ window.onload = function() {
       currentString = "";
       currentString = inputs[lineIndex].value.trim();
 
-      if (currentString.trim() != "history") {
+      //if (currentString.trim() != "history") {
 
         command.historyList.push(currentString);
-      }
+      //}
 
       // console.log("current string ", currentString);
 

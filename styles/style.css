@@ -179,7 +179,7 @@ textArea {
 }
 
 #playerDataHolder {
-  color: #222222;
+  color: #888888;
   /*background-color: #111111;*/
   text-align: center;
   width: 200px;
@@ -187,7 +187,7 @@ textArea {
   float: right;
   font-weight: bold;
   right: 100px;
-  bottom: 500px;
+  bottom: 440px;
   position: fixed;
   text-align: left;
   font-family: sans-serif;
@@ -211,4 +211,14 @@ button {
   bottom: 460px;
   position: fixed;
 
+}
+
+#preloader {
+  position: absolute;
+  font-family: sans-serif;
+  color: "#999999";
+  right: 300px;
+  bottom: 20px;
+  font-size: 16px;
+  display: none;
 }
