@@ -17,7 +17,7 @@ function GridEntity() {
         this.color = "#44FF00";
       }
       canvas.context.strokeStyle = "#EEEEEE";
-      //canvas.context.strokeRect(this.x, this.y, settings.gridSize, settings.gridSize);
+      canvas.context.strokeRect(this.x, this.y, settings.gridSize, settings.gridSize);
       // canvas.context.stroke();
 
 

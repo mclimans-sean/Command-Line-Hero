@@ -247,15 +247,15 @@ window.onload = function() {
   function drawEntities() {
 
     for (var i = 0; i < factory.brickArray.length; i++) {
-      //  factory.gridArray[i].draw();
+        // factory.gridArray[i].draw();
 
       // if (factory.coinsArray[i] != null) {
       //   factory.coinsArray[i].draw();
       // }
       //
-      // if (factory.brickArray[i] != null) {
-      //   factory.brickArray[i].draw(insaneMode);
-      // }
+      if (factory.brickArray[i] != null) {
+        factory.brickArray[i].draw(insaneMode);
+      }
 
       if (factory.enemiesArray[i] != null) {
         factory.enemiesArray[i].draw();
@@ -446,6 +446,7 @@ window.onload = function() {
         if (health <= 0) {
           EnemyManager.removeEnemies();
           consoleMessage = "You lose. Click 'Reset game' to replay";
+          global.time = 0;
         }
 
         if (gameState == 1) {
@@ -472,7 +473,7 @@ window.onload = function() {
   function updateTexts() {
     // utility.getElement("score-txt").innerHTML = "Score " + global.score;
     utility.getElement("score-txt").innerHTML = "Score: " + Math.round(global.time / 100);
-    utility.getElement("base-health-text").innerHTML = "Health: " + health;
+    // utility.getElement("base-health-text").innerHTML = "Health: " + health;
     utility.getElement("console").innerHTML = consoleMessage;
     // utility.getElement("status-txt").innerHTML = "Mode: " + statusMode;
   }

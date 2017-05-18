@@ -35,7 +35,7 @@ canvas {
   border-style: solid;
   border-width: 8px;
   border-color: #DDDDDD;
-  border-radius: 40px;
+  border-radius: 10px;
 }
 
 .sideBar {
@@ -59,13 +59,15 @@ canvas {
 }
 
 #console {
-  color: #EEEEEE;
-  background-color: #11111F;
+  color: #888888;
+  background-color: #FFFFFF;
   margin: 0px auto;
   text-align: center;
+  font-weight: bold;
   width: 400px;
   height: 20px;
   border-radius: 8px;
+  font-family: sans-serif;
 }
 
 .help {
@@ -177,16 +179,18 @@ textArea {
 }
 
 #playerDataHolder {
-  color: #EEEEEE;
-  background-color: #111111;
+  color: #222222;
+  /*background-color: #111111;*/
   text-align: center;
   width: 200px;
-  height: 40px;
+  height: 100px;
   float: right;
+  font-weight: bold;
   right: 100px;
-  bottom: 540px;
+  bottom: 500px;
   position: fixed;
   text-align: left;
+  font-family: sans-serif;
 }
 
 input {
@@ -203,8 +207,8 @@ text {
 
 button {
   float: right;
-  right: 100px;
-  bottom: 540px;
+  right: 220px;
+  bottom: 460px;
   position: fixed;
 
 }

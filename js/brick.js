@@ -14,7 +14,7 @@ function Brick() {
     if (this.isActive) {
 
       canvas.context.strokeStyle = this.color;
-      canvas.context.strokeRect(this.x, this.y, settings.gridSize, settings.gridSize);
+      canvas.context.strokeRect(this.x, this.y, canvas.width, settings.gridSize / 8);
       canvas.context.stroke();
     }
 
