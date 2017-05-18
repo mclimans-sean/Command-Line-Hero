@@ -4,18 +4,108 @@
 <head>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script type="text/javascript" src="js/utility.js"></script>
-  <link rel="stylesheet" href="styles/style.css">
   <meta charset="utf-8">
   <title>Menu</title>
+
+  <style>
+
+    html, body {
+      text-align: center;
+      font-family: monospace;
+    }
+
+    #help {
+
+      /*font-family: sans-serif;*/
+      font-weight: bold;
+      color: #444444;
+      margin-top: 100px;
+      text-align: center;
+      background: #EEEEEE;
+      margin-left: 0px auto;
+    }
+
+    #loader {
+      display: none;
+      /*font-family: sans-serif;*/
+      font-weight: bold;
+      color: #AAAAAA;
+      margin-top: 100px;
+      font-size: 40px;
+      text-align: center;
+    }
+
+    #help-btn {
+      display: flex;
+      margin: 0px auto;
+      margin-top: 200px;
+      text-align: center;
+      /*width: 40%;*/
+      /*margin-top: 40%;*/
+    }
+    #play-btn {
+      display: flex;
+      margin: 0px auto;
+      margin-top: 100px;
+      text-align: center;
+      display: none;
+      /*width: 40%;*/
+      /*margin-top: 40%;*/
+    }
+
+  </style>
 
 </head>
 
 <body>
 
-  <div class="menu">
-    <a href="index.html" target="blank">PLAY</a>
-  </div>
+
+  <button id = "help-btn" type = "button" class="btn btn-default">Load game instructions</button>
+  <button id = "play-btn" type = "button" class="btn btn-default">PLAY</button>
+  <div id = "loader">Loading help instructions</div>
+  <div id = "help"></div>
+
+
+  <script>
+
+    let URL = "https://cors-anywhere.herokuapp.com/fhdhaidari.com/clih/help.php";
+
+    $("#help-btn").click(function() {
+
+
+      utility.getElement("play-btn").style.display = "block";
+
+      // $("#help-btn").prop('disabled', true);
+
+      utility.getElement("loader").style.display = "block";
+
+      $.getJSON(URL, function(result) {
+
+
+        var key = Object.keys(result[0]);
+
+        for (var i = 0; i < Object.keys(result[0]).length; i++) {
+          utility.getElement("help").innerHTML += key[i] + " : " + result[0][key[i]] + "</br></br>";
+
+          $("#help-btn").prop('disabled', false);
+        }
+
+        utility.getElement("loader").style.display = "none";
+        utility.getElement("help-btn").style.display = "none";
+
+
+      });
+
+
+      $("#play-btn").click(function() {
+        document.location.href = "index.html";
+      });
+
+    })
+  </script>
+
 
 </body>
 

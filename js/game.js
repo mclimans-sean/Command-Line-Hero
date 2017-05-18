@@ -553,7 +553,7 @@ window.onload = function() {
           if (hero.y - targetY < 1) {
             isAttack = false;
             ySpeed = 5;
-            xSpeed = 0;
+            //xSpeed = 0;
           }
         }
       }
