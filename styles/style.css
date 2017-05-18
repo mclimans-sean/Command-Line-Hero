@@ -33,7 +33,7 @@ canvas {
   margin: 20px auto;
   margin: 10px auto;
   border-style: solid;
-  border-width: 8px;
+  border-width: 0px;
   border-color: #DDDDDD;
   border-radius: 10px;
 }
@@ -207,7 +207,7 @@ text {
 
 button {
   float: right;
-  right: 220px;
+  right: 240px;
   bottom: 460px;
   position: fixed;
 

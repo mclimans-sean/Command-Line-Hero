@@ -37,6 +37,8 @@ var _width;
 var isEnemyReachedBottomResult = false;
 var addParticles = false;
 
+var messages = ["Awesome", "Great", "Maniac", "Woooaaaha"];
+
 window.onload = function() {
 
   // factory.createGridEntities();
@@ -208,7 +210,7 @@ window.onload = function() {
 
   function draw() {
 
-    clearEffectCounter += 20;
+    clearEffectCounter += 10;
     if (clearEffectCounter >= canvas.width) {
       clearEffectCounter = 0;
     }
@@ -380,8 +382,12 @@ window.onload = function() {
 
   function update() {
 
+
     if (gameState == 1) {
       draw(); // always draw, Pablo Picasso ;)
+
+
+      updateTimeMessage();
 
       slowCounter++;
 
@@ -396,6 +402,9 @@ window.onload = function() {
           var enemy = heroEnemyCollisionResult[1];
           //EnemyManager.advance();
           enemy.advance();
+
+          timeToResetMessage = 100;
+          consoleMessage = messages[Math.floor((Math.random() * 4 - 0) + 0)];
           //    enemy.isHit = true;
           //  enemy.hit(40);
 
@@ -445,7 +454,7 @@ window.onload = function() {
 
         if (health <= 0) {
           EnemyManager.removeEnemies();
-          consoleMessage = "You lose. Click 'Reset game' to replay";
+          consoleMessage = "You lose. Use the 'reset' command to replay";
           global.time = 0;
         }
 
@@ -469,6 +478,19 @@ window.onload = function() {
     }
     //requestAnimationFrame(update);
   }
+
+  function updateTimeMessage() {
+
+   if (timeToResetMessage > 0) {
+     timeToResetMessage--;
+
+     if (timeToResetMessage == 1) {
+       timeToResetMessage = 0;
+       consoleMessage = "Go go go!";
+     }
+   }
+
+ }
 
   function updateTexts() {
     // utility.getElement("score-txt").innerHTML = "Score " + global.score;
@@ -529,6 +551,10 @@ window.onload = function() {
         inputs[lineIndex].value = "History: " + command.history();
         addNewInput();
         lineIndex++;
+      }
+
+      if(currentString.trim() == "reset") {
+        location.reload();
       }
 
 
