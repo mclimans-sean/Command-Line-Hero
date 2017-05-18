@@ -153,6 +153,7 @@ window.onload = function() {
 
   function start() {
     gameState = 1;
+    sound.playMusic();
 
     //   setTimeout(function() {
     //      requestAnimationFrame(update);

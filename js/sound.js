@@ -6,6 +6,8 @@ var sound = {
   winSoundPath: "assets/sounds/win.wav",
   insaneSoundPath: "assets/sounds/crazy.mp3",
   histSoundPath: "assets/sounds/hit.wav",
+  musicPath: "assets/sounds/music.wav",
+  slowMusicPath: "assets/sounds/slowmusic.mp3",
   soundTrack: undefined,
 
   playError: function() {
@@ -34,7 +36,7 @@ var sound = {
   },
 
   playMusic: function() {
-    this.soundTrack = new Audio(this.insaneSoundPath);
+    this.soundTrack = new Audio(this.slowMusicPath);
     this.soundTrack.addEventListener('ended', function() {
       this.currentTime = 0;
       this.loop = true;

@@ -64,7 +64,7 @@ function Enemy() {
     };
 
     this.advance = function () {
-      this.speedLimit += 0.1;
+      this.speedLimit += 0.4;
       this.ySpeed = Math.floor(Math.random() * (this.speedLimit - 0.2)) + 0.2;
     };
 
