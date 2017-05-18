@@ -33,9 +33,9 @@ canvas {
   margin: 20px auto;
   margin: 10px auto;
   border-style: solid;
-  border-width: 4px;
-  border-color: #444444;
-  border-radius: 10px;
+  border-width: 8px;
+  border-color: #DDDDDD;
+  border-radius: 40px;
 }
 
 .sideBar {
@@ -103,6 +103,8 @@ div {}
 input {
   margin: 20px auto;
   display: inline-block;
+  font-family: monospace;
+  font-weight: bold;
   background: #111111;
   color: white;
 }
@@ -119,12 +121,16 @@ input {
 .terminal {
   position: fixed;
   width: 200px;
-  height: 500px;
+  height: 520px;
   left: 20px;
   margin: 10px auto;
   font-family: sans-serif;
   float: left;
-  background: #111111;
+  /*border-style: solid;
+  border-color: #DDDDDD;
+  border-width: 2px;
+  border-radius: 10px;*/
+  background: #FFFFFF;
   color: white;
   padding: 10px;
   overflow: auto;
@@ -140,8 +146,8 @@ input {
   margin-bottom: 10px;
   background-color: transparent;
   border-style: none;
-  font-size: 12px;
-  color: #00AAFF;
+  font-size: 14px;
+  color: #222222;
 }
 
 input:focus,

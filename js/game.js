@@ -27,21 +27,21 @@ const FRICTION = 0.9;
 var inputs = [];
 var isAttack = false;
 var originY = 0;
-var health = 0;
+var health = 1;
 var particles = [];
 var numParticles = 40;
 var maxSpeed = 10;
 var switchDepth = false;
 var enemy;
 var _width;
-
+var isEnemyReachedBottomResult = false;
 var addParticles = false;
 
 window.onload = function() {
 
   // factory.createGridEntities();
   factory.createBricks();
-//  factory.createCoins();
+  //  factory.createCoins();
   factory.createEnemies();
   canvas.init();
   levelManager.buildStage(stages[0]);
@@ -56,7 +56,7 @@ window.onload = function() {
   }
 
 
-  calculateHealth();
+  // calculateHealth();
 
   var moveLeft = function() {
     sound.playWhip();
@@ -152,14 +152,14 @@ window.onload = function() {
   function start() {
     gameState = 1;
 
-  //   setTimeout(function() {
-  //      requestAnimationFrame(update);
-  //      // Drawing code goes here
-  //  }, 0 / 60);
-   //
+    //   setTimeout(function() {
+    //      requestAnimationFrame(update);
+    //      // Drawing code goes here
+    //  }, 0 / 60);
+    //
 
     //update();
-  timer = setInterval(update, settings.TIME_DELAY);
+    timer = setInterval(update, settings.TIME_DELAY);
   }
 
   function addNewInput() {
@@ -209,10 +209,10 @@ window.onload = function() {
   function draw() {
 
     clearEffectCounter += 20;
-    if(clearEffectCounter >= canvas.width) {
+    if (clearEffectCounter >= canvas.width) {
       clearEffectCounter = 0;
     }
-    canvas.context.clearRect(0, 0, clearEffectCounter + 10 , clearEffectCounter);
+    canvas.context.clearRect(0, 0, clearEffectCounter + 10, clearEffectCounter);
     if (switchDepth) {
       hero.draw();
     }
@@ -351,6 +351,27 @@ window.onload = function() {
 
   }
 
+
+
+  function isEnemyReachedBottom() {
+
+    for (var i = 0; i < factory.enemiesArray.length; i++) {
+
+      var enemy = factory.enemiesArray[i];
+
+      if (enemy.isActive && !enemy.isHit) {
+
+        if (enemy.y > 480) {
+          return true;
+        }
+      }
+
+    }
+
+    return false;
+
+  }
+
   function reset() {
     global.score = 0;
     targetX = hero.x;
@@ -369,7 +390,7 @@ window.onload = function() {
         slowCounter = 0;
 
         heroEnemyCollisionResult = checkCollisionBetweenHeroAndEnemy();
-        enemyBaseCollisionResult = checkCollisionBetweenEnemyAndBase();
+        // enemyBaseCollisionResult = checkCollisionBetweenEnemyAndBase();
 
         if (heroEnemyCollisionResult[0]) {
           var enemy = heroEnemyCollisionResult[1];
@@ -379,8 +400,8 @@ window.onload = function() {
           //  enemy.hit(40);
 
 
-          for(var j = 0; j < numParticles; j ++) {
-            if(particles[i]) {
+          for (var j = 0; j < numParticles; j++) {
+            if (particles[i]) {
               particles[i] = null;
               delete particles[i];
             }
@@ -396,7 +417,7 @@ window.onload = function() {
           addParticles = true;
 
           sound.playHit();
-          var rndm = Math.floor( ( Math.random() * 500 ) + 40 );
+          var rndm = Math.floor((Math.random() * 500) + 40);
           //output.push( rndm = rndm - (rndm % multiplier) );
 
           canvas.context.strokeStyle = "#111111";
@@ -404,38 +425,25 @@ window.onload = function() {
           // enemy.x =  Math.floor(Math.random() * (560 - 0)) + 0;
           enemy.x = rndm;
           enemy.y = 0;
-          // requestAnimationFrame(update);
-
-
-
-
-
-
-          // EnemyManager.moveUp();
-          //enemy.isActive = false;
           anim.shake(utility.getElement("canvas"));
           EnemyManager.advance();
 
         }
 
-        if (enemyBaseCollisionResult[0]) {
+        enemyBaseCollisionResult = isEnemyReachedBottom();
+        //if (enemyBaseCollisionResult[0]) {
+        if(enemyBaseCollisionResult) {
           var enemy = enemyBaseCollisionResult[1];
-          var basePart = enemyBaseCollisionResult[2];
-          //enemy.isHit = true;
-          //  enemy.hit(10);
-          // factory.brickArray.splice(0, 1);
-          if(health > 0) {
+
+          if (health > 0) {
             health--;
           }
 
-          //basePart.isActive = false;
-          basePart.deactivate();
-          basePart.removed = true;
         }
 
         EnemyManager.update();
 
-        if(health <= 0) {
+        if (health <= 0) {
           EnemyManager.removeEnemies();
           consoleMessage = "You lose. Click 'Reset game' to replay";
         }
