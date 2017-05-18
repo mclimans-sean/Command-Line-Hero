@@ -9,12 +9,14 @@ var anim = {
         element.style.display = 'none';
       }
       element.style.opacity = op;
-      element.style.filter = 'alpha(opacity=' + op * 100 + ")";
+      element.style.filter = 'alpha(opacity=' + op * 1000 + ")";
       op -= op + 0.1;
     }, 50);
   },
 
   fadeIn: function(element) {
+
+    element = document.getElementById("canvas");
     var op = 0; // initial opacity
     var timer = setInterval(function() {
       if (op >= 1) {
@@ -22,7 +24,7 @@ var anim = {
         element.style.display = 'block';
       }
       element.style.opacity = op;
-      element.style.filter = 'alpha(opacity=' + op * 100 + ")";
+      element.style.filter = 'alpha(opacity=' + op * 1000 + ")";
       op += 0.1;
     }, 50);
   },

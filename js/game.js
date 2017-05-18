@@ -36,6 +36,8 @@ var enemy;
 var _width;
 var isEnemyReachedBottomResult = false;
 var addParticles = false;
+var helpCommands = ["left: move left", "right: move right", "attack: jump and attack", "clear: clear commands",
+"press TAB to auto complete", "help: get help"];
 
 var messages = ["Awesome", "Great", "Maniac", "Woooaaaha"];
 
@@ -119,6 +121,13 @@ window.onload = function() {
     attack = true;
   }
 
+  var help = function() {
+    for(var i = 0; i < helpCommands.length + 1; i ++) {
+      addNewInput(helpCommands[i]);
+      lineIndex ++;
+    }
+  }
+
   $("body").click(function() {
     inputs[lineIndex].focus();
   });
@@ -133,6 +142,7 @@ window.onload = function() {
   command.pause = pause;
   command.slow = slow;
   command.attack = attack;
+  command.help = help;
 
   heroStepLength = settings.gridSize + canvas.padding;
 
@@ -152,6 +162,8 @@ window.onload = function() {
   }
 
   function start() {
+
+    anim.fadeIn();
     gameState = 1;
     sound.playMusic();
 
@@ -165,18 +177,21 @@ window.onload = function() {
     timer = setInterval(update, settings.TIME_DELAY);
   }
 
-  function addNewInput() {
+  function addNewInput(_text) {
 
     if (lineIndex > 0) {
       inputs[lineIndex].disabled = true;
       // console.log("input disabled");
     }
 
+    if(_text == undefined) {
+      _text = "";
+    }
     goingUpIndex = lineIndex;
 
     var input = document.createElement("INPUT");
     input.setAttribute("type", "text");
-    input.setAttribute("value", "");
+    input.setAttribute("value", _text);
     input.className = "terminalInput";
     input.id = "test";
     document.getElementsByClassName("terminal")[0].appendChild(input);
@@ -457,6 +472,7 @@ window.onload = function() {
           EnemyManager.removeEnemies();
           consoleMessage = "You lose. Use the 'reset' command to replay";
           global.time = 0;
+
         }
 
         if (gameState == 1) {
@@ -516,10 +532,21 @@ window.onload = function() {
     }
 
     if (event.keyCode == 38) { // pressed up
-      if (goingUpIndex > 0) {
-        goingUpIndex--;
+      if (goingUpIndex >= 0) {
+
         inputs[lineIndex].value = command.history()[goingUpIndex];
         currentString = command.history()[goingUpIndex];
+        goingUpIndex--;
+
+      }
+    }
+
+    if (event.keyCode == 40) { // pressed up
+      if (goingUpIndex < lineIndex - 1) {
+        goingUpIndex++;
+        inputs[lineIndex].value = command.history()[goingUpIndex];
+        currentString = command.history()[goingUpIndex];
+
 
       }
     }
