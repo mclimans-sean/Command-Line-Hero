@@ -41,6 +41,8 @@ var countToUpdateTime = 0;
 var maxTimeReached = 0;
 var isGameOver = false;
 var messages = ["Awesome", "Great", "Maniac", "Woooaaaha"];
+var weatherParticles = [];
+var countUpdateWeatherParticle = 0;
 
 window.onload = function() {
 
@@ -50,10 +52,6 @@ window.onload = function() {
   factory.createEnemies();
   canvas.init();
   levelManager.buildStage(stages[0]);
-
-
-
-
 
   // testing server request
 
@@ -91,7 +89,7 @@ window.onload = function() {
   // }
 
   addParticles();
-
+  // addWeatherParticles();
   // calculateHealth();
 
   var moveLeft = function() {
@@ -158,6 +156,8 @@ window.onload = function() {
   // }
 
   var help = function() {
+    addNewInput("Help-");
+    lineIndex++;
     for (var i = 0; i < helpCommands.length + 1; i++) {
       addNewInput(helpCommands[i]);
       lineIndex++;
@@ -165,7 +165,7 @@ window.onload = function() {
   }
 
   var history = function() {
-    addNewInput("History: ");
+    addNewInput("History-");
     lineIndex ++;
     for (var i = 0; i < command.history().length + 1; i++) {
       addNewInput(command.history()[i]);
@@ -203,6 +203,18 @@ window.onload = function() {
       // particles.push(particle.create(200, 200, Math.random() * maxSpeed + 2, Math.random() * Math.PI * 2));
       particles[i] = particle.create(-400, -400, Math.random() * maxSpeed + 2, Math.random() * Math.PI * 2);
 
+    }
+  }
+
+  function addWeatherParticles () {
+    for (var i = 0; i < 40; i += 1) {
+      var obj = {
+        x: i * 40,
+        y: i * 40,
+        xVel: utility.getRandomRange(2, 1),
+        yVel: Math.random() * 10
+      };
+      weatherParticles.push(obj);
     }
   }
 
@@ -343,8 +355,25 @@ window.onload = function() {
       canvas.context.strokeRect(p.position.getX(), p.position.getY(), 2, 2);
       canvas.context.fill();
 
-    }
+  //   }
+  //   countUpdateWeatherParticle ++;
+  //   if(countUpdateWeatherParticle > 4) {
+  //   for (var j = 0; j < weatherParticles.length; j++) {
+  //     var weatherParticle = weatherParticles[j];
+  //     // weatherParticle.update();
+  //     canvas.context.strokeStyle = "#DDDDDD"
+  //     weatherParticle.x = utility.getRandomRange(500, 20);
+  //
+  //     weatherParticle.y = utility.getRandomRange(500, 20);
+  //
+  //     canvas.context.strokeRect(weatherParticle.x, weatherParticle.y, 6, 6);
+  //
+  //     canvas.context.fill();
+  //
+  //   }
+  //   countUpdateWeatherParticle = 0;
   }
+}
 
   function drawEntities() {
 
@@ -385,7 +414,7 @@ window.onload = function() {
   }
 
   function isHeroOutOfBorders() {
-    if (hero.x + hero.width >= 530 || hero.x <= 0) {
+    if (hero.x + hero.width >= 500 || hero.x <= 10) {
       return true;
     }
   }

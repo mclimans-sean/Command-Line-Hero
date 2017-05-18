@@ -31,6 +31,11 @@ var utility = {
     return color;
   },
 
+
+  getRandomRange : function (_max, _min) {
+    return Math.floor(Math.random() * (_max - _min)) + _min;
+  },
+
   setSelectionRange: function(input, selectionStart, selectionEnd) {
 
     // if (input.setSelectionRange) {
