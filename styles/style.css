@@ -1,7 +1,6 @@
 html, body {
   background-color: #FFFFFF;
   margin: 0px auto;
-
   font-family: sans-serif;
 }
 
@@ -116,7 +115,7 @@ input {
   margin-left: 1px;
   float: left;
   background: white;
-  width:20px;
+  width: 20px;
   color: white;
 }
 
@@ -152,11 +151,8 @@ input {
   color: #222222;
 }
 
-input:focus,
-select:focus,
-textarea:focus,
-button:focus {
-    outline: none;
+input:focus, select:focus, textarea:focus, button:focus {
+  outline: none;
 }
 
 textArea {
@@ -210,7 +206,6 @@ button {
   right: 240px;
   bottom: 460px;
   position: fixed;
-
 }
 
 #preloader {

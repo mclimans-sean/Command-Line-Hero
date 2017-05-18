@@ -38,6 +38,9 @@ var isEnemyReachedBottomResult = false;
 var addParticles = false;
 var helpCommands = [];
 
+var countToUpdateTime = 0;
+var maxTimeReached = 0;
+
 var messages = ["Awesome", "Great", "Maniac", "Woooaaaha"];
 
 window.onload = function() {
@@ -59,7 +62,7 @@ window.onload = function() {
   utility.getElement("preloader").innerHTML = "Loading help commands...";
   utility.getElement("preloader").style.display = "block";
 
-  $.getJSON("https://cors-anywhere.herokuapp.com/fhdhaidari.com/clih/help.php", function(result){
+  $.getJSON("https://cors-anywhere.herokuapp.com/fhdhaidari.com/clih/help.php", function(result) {
 
     //console.log("Result === " , result[0]["right"]);
 
@@ -68,12 +71,12 @@ window.onload = function() {
 
     //console.log("Key 1 " , key[1]);
 
-    for(var i = 0; i < Object.keys(result[0]).length; i ++) {
+    for (var i = 0; i < Object.keys(result[0]).length; i++) {
       helpCommands.push(key[i] + " : " + result[0][key[i]]);
     }
 
     //console.log(helpCommands.toString());
-   utility.getElement("preloader").style.display = "none";
+    utility.getElement("preloader").style.display = "none";
     //anim.fadeOut("preloader");
 
   });
@@ -96,7 +99,7 @@ window.onload = function() {
     xSpeed = -10;
   }
 
-  var up = function () {
+  var up = function() {
     attack = true;
   }
 
@@ -155,9 +158,9 @@ window.onload = function() {
   // }
 
   var help = function() {
-    for(var i = 0; i < helpCommands.length + 1; i ++) {
+    for (var i = 0; i < helpCommands.length + 1; i++) {
       addNewInput(helpCommands[i]);
-      lineIndex ++;
+      lineIndex++;
     }
   }
 
@@ -194,8 +197,30 @@ window.onload = function() {
     }
   }
 
+  function setupHighScore() {
+
+    if (localStorage.highScore) {
+      maxTimeReached = localStorage.getItem("highScore");
+      // localStorage.setItem("highScore", 0);
+
+    } else {
+
+      localStorage.setItem("highScore", 0);
+      maxTimeReached = 0;
+    }
+  }
+
+  function saveHighScore (_val) {
+    if(maxTimeReached < _val) {
+      localStorage.highScore = _val.toString();
+    }
+  }
+
   function start() {
 
+    setupHighScore();
+
+    console.log("High-Score ", localStorage.highScore);
     anim.fadeIn();
     gameState = 1;
     sound.playMusic();
@@ -217,7 +242,7 @@ window.onload = function() {
       // console.log("input disabled");
     }
 
-    if(_text == undefined) {
+    if (_text == undefined) {
       _text = "";
     }
     goingUpIndex = lineIndex;
@@ -298,7 +323,7 @@ window.onload = function() {
   function drawEntities() {
 
     for (var i = 0; i < factory.brickArray.length; i++) {
-        // factory.gridArray[i].draw();
+      // factory.gridArray[i].draw();
 
       // if (factory.coinsArray[i] != null) {
       //   factory.coinsArray[i].draw();
@@ -492,7 +517,7 @@ window.onload = function() {
 
         enemyBaseCollisionResult = isEnemyReachedBottom();
         //if (enemyBaseCollisionResult[0]) {
-        if(enemyBaseCollisionResult) {
+        if (enemyBaseCollisionResult) {
           var enemy = enemyBaseCollisionResult[1];
 
           if (health > 0) {
@@ -504,14 +529,20 @@ window.onload = function() {
         EnemyManager.update();
 
         if (health <= 0) {
+        saveHighScore(global.time);
           EnemyManager.removeEnemies();
           consoleMessage = "You lose. Type the 'reset' command to replay";
-          global.time = 0;
+          // global.time = 0;
 
         }
 
         if (gameState == 1) {
-          global.time++;
+          countToUpdateTime ++;
+          if(countToUpdateTime > 60) { // I used this method in order to not divide by 1000 (num seconds).
+            global.time++;
+            countToUpdateTime = 0;
+          }
+          // global.score ++;
         }
 
         //updateInsanelMode();
@@ -532,22 +563,24 @@ window.onload = function() {
 
   function updateTimeMessage() {
 
-   if (timeToResetMessage > 0) {
-     timeToResetMessage--;
+    if (timeToResetMessage > 0) {
+      timeToResetMessage--;
 
-     if (timeToResetMessage == 1) {
-       timeToResetMessage = 0;
-       consoleMessage = "Go go go!";
-     }
-   }
+      if (timeToResetMessage == 1) {
+        timeToResetMessage = 0;
+        consoleMessage = "Go go go!";
+      }
+    }
 
- }
+  }
 
   function updateTexts() {
 
     // utility.getElement("score-txt").innerHTML = "Score " + global.score;
     // utility.getElement("score-txt").innerHTML = "Score: " + Math.round(global.time / 100);
-    utility.getElement("score-txt").innerHTML = "Score: " + Math.round(global.time / 100);
+
+    utility.getElement("max-time-txt").innerHTML = "High Score: " + maxTimeReached;
+    utility.getElement("score-txt").innerHTML = "Score: " + global.time;
     // utility.getElement("base-health-text").innerHTML = "Health: " + health;
     utility.getElement("console").innerHTML = consoleMessage;
     // utility.getElement("status-txt").innerHTML = "Mode: " + statusMode;
@@ -594,7 +627,7 @@ window.onload = function() {
 
       //if (currentString.trim() != "history") {
 
-        command.historyList.push(currentString);
+      command.historyList.push(currentString);
       //}
 
       // console.log("current string ", currentString);
@@ -617,7 +650,7 @@ window.onload = function() {
         lineIndex++;
       }
 
-      if(currentString.trim() == "reset") {
+      if (currentString.trim() == "reset") {
         location.reload();
       }
 
