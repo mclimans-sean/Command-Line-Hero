@@ -23,7 +23,7 @@ var slowCounter = 0;
 var slowOffset = 0;
 var gameState = 1;
 var speed = 1;
-const FRICTION = 0.9;
+const FRICTION = 0.94;
 var inputs = [];
 var isAttack = false;
 var originY = 0;
@@ -396,9 +396,16 @@ window.onload = function() {
 
   function updateHeroPosition() {
 
-    if (isHeroOutOfBorders()) {
-      xSpeed *= -1;
+    // if (isHeroOutOfBorders()) {
+
+    if(hero.x  > 500) {
+      hero.x = 0;
     }
+    if(hero.x < -20) {
+      hero.x = 500
+    }
+      // xSpeed *= -1;
+    // }
 
     if (hero.y > hero.originY) { // if hero exceeds the ground-level put on ground.
       hero.y = hero.originY;
@@ -641,6 +648,8 @@ window.onload = function() {
 
   $(document).keydown(function(event) {
 
+    sound.playTyping();
+    
     if (event.keyCode == 9) { // tab pressed
       event.preventDefault();
 

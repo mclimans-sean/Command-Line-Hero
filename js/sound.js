@@ -8,6 +8,7 @@ var sound = {
   histSoundPath: "assets/sounds/hit.wav",
   musicPath: "assets/sounds/music.wav",
   slowMusicPath: "assets/sounds/slowmusic.mp3",
+  typeSoundPath: "assets/sounds/type.wav",
   soundTrack: undefined,
 
   playError: function() {
@@ -27,6 +28,10 @@ var sound = {
 
   playWin: function() {
     var snd = new Audio(this.winSoundPath);
+    snd.play();
+  },
+  playTyping: function() {
+    var snd = new Audio(this.typeSoundPath);
     snd.play();
   },
 
