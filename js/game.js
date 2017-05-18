@@ -35,12 +35,11 @@ var switchDepth = false;
 var enemy;
 var _width;
 var isEnemyReachedBottomResult = false;
-var addParticles = false;
+// var updateParticles = false;
 var helpCommands = [];
-
 var countToUpdateTime = 0;
 var maxTimeReached = 0;
-
+var isGameOver = false;
 var messages = ["Awesome", "Great", "Maniac", "Woooaaaha"];
 
 window.onload = function() {
@@ -85,12 +84,13 @@ window.onload = function() {
   ////////////////////////////
 
   // // creating the particles
-  for (var i = 0; i < numParticles; i += 1) {
-    // particles.push(particle.create(200, 200, Math.random() * maxSpeed + 2, Math.random() * Math.PI * 2));
-    particles[i] = particle.create(200, 200, Math.random() * maxSpeed + 2, Math.random() * Math.PI * 2);
+  // for (var i = 0; i < numParticles; i += 1) {
+  //   // particles.push(particle.create(200, 200, Math.random() * maxSpeed + 2, Math.random() * Math.PI * 2));
+  //   particles[i] = particle.create(200, 200, Math.random() * maxSpeed + 2, Math.random() * Math.PI * 2);
+  //
+  // }
 
-  }
-
+  addParticles();
 
   // calculateHealth();
 
@@ -164,6 +164,16 @@ window.onload = function() {
     }
   }
 
+  var history = function() {
+    addNewInput("History: ");
+    lineIndex ++;
+    for (var i = 0; i < command.history().length + 1; i++) {
+      addNewInput(command.history()[i]);
+      lineIndex++;
+    }
+  }
+
+
   $("body").click(function() {
     inputs[lineIndex].focus();
   });
@@ -188,6 +198,13 @@ window.onload = function() {
   addNewInput();
 
 
+  function addParticles() {
+    for (var i = 0; i < numParticles; i += 1) {
+      // particles.push(particle.create(200, 200, Math.random() * maxSpeed + 2, Math.random() * Math.PI * 2));
+      particles[i] = particle.create(-400, -400, Math.random() * maxSpeed + 2, Math.random() * Math.PI * 2);
+
+    }
+  }
 
   function calculateHealth() {
     for (var i = 0; i < factory.brickArray.length; i++) {
@@ -210,8 +227,8 @@ window.onload = function() {
     }
   }
 
-  function saveHighScore (_val) {
-    if(maxTimeReached < _val) {
+  function saveHighScore(_val) {
+    if (maxTimeReached < _val) {
       localStorage.highScore = _val.toString();
     }
   }
@@ -237,19 +254,25 @@ window.onload = function() {
 
   function addNewInput(_text) {
 
+    var fontColor = "#444444";
     if (lineIndex > 0) {
       inputs[lineIndex].disabled = true;
+
       // console.log("input disabled");
     }
 
     if (_text == undefined) {
       _text = "";
+    } else {
+
+      fontColor = "#2222CC";
     }
     goingUpIndex = lineIndex;
 
     var input = document.createElement("INPUT");
     input.setAttribute("type", "text");
     input.setAttribute("value", _text);
+    input.style.color = fontColor;
     input.className = "terminalInput";
     input.id = "test";
     document.getElementsByClassName("terminal")[0].appendChild(input);
@@ -293,21 +316,7 @@ window.onload = function() {
       hero.draw();
     }
 
-    if (addParticles) {
-
-      for (var i = 0; i < numParticles; i += 1) {
-        var p = particles[i];
-        p.update();
-        // console.log("updating");
-        canvas.context.strokeStyle = "#666666"
-        // canvas.context.beginPath();
-        // canvas.context.arc(p.position.getX(), p.position.getY(), 10, 10, Math.PI * 2, false);
-
-        canvas.context.strokeRect(p.position.getX(), p.position.getY(), 2, 2);
-        canvas.context.fill();
-
-      }
-    }
+    updateParticles();
 
 
     drawEntities();
@@ -318,6 +327,23 @@ window.onload = function() {
       hero.draw();
     }
 
+  }
+
+
+  function updateParticles() {
+
+    for (var i = 0; i < numParticles; i += 1) {
+      var p = particles[i];
+      p.update();
+      // console.log("updating");
+      canvas.context.strokeStyle = "#666666"
+      // canvas.context.beginPath();
+      // canvas.context.arc(p.position.getX(), p.position.getY(), 10, 10, Math.PI * 2, false);
+
+      canvas.context.strokeRect(p.position.getX(), p.position.getY(), 2, 2);
+      canvas.context.fill();
+
+    }
   }
 
   function drawEntities() {
@@ -499,8 +525,6 @@ window.onload = function() {
 
           }
 
-          addParticles = true;
-
           sound.playHit();
           var rndm = Math.floor((Math.random() * 500) + 40);
           //output.push( rndm = rndm - (rndm % multiplier) );
@@ -529,16 +553,16 @@ window.onload = function() {
         EnemyManager.update();
 
         if (health <= 0) {
-        saveHighScore(global.time);
+          saveHighScore(global.time);
           EnemyManager.removeEnemies();
           consoleMessage = "You lose. Type the 'reset' command to replay";
-          // global.time = 0;
-
+          isGameOver = true;
+          //global.time = 0;
         }
 
-        if (gameState == 1) {
-          countToUpdateTime ++;
-          if(countToUpdateTime > 60) { // I used this method in order to not divide by 1000 (num seconds).
+        if (gameState == 1 && !isGameOver) {
+          countToUpdateTime++;
+          if (countToUpdateTime > 60) { // I used this method in order to not divide by 1000 (num seconds).
             global.time++;
             countToUpdateTime = 0;
           }
@@ -645,9 +669,11 @@ window.onload = function() {
       }
 
       if (currentString.trim() == "history") {
-        inputs[lineIndex].value = "History: " + command.history();
-        addNewInput();
-        lineIndex++;
+        // inputs[lineIndex].value = "History: " + command.history();
+        // addNewInput();
+        // lineIndex++;
+
+        history();
       }
 
       if (currentString.trim() == "reset") {
