@@ -28,15 +28,6 @@ function Brick() {
       this.isActive = true;
     },
 
-    this.reset = function(_x, _y, _row, _col, _id) {
-      this.x = _x;
-      this.y = _y;
-      this.row = _row;
-      this.col = _col;
-      this.id = _id;
-
-    };
-
     this.deactivate = function () {
       this.color = "#888888";
     }

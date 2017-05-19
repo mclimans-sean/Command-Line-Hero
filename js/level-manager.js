@@ -1,7 +1,6 @@
 var levelManager = {
 
   currentLevelIndex: 0,
-  startPos :0,
   positions: [],
 
   buildStage: function(map) {
@@ -9,15 +8,6 @@ var levelManager = {
     global.map = map;
     var padding = canvas.padding;
     var brickIndex = 0;
-    var gridIndex = 0;
-    var coinIndex = 0;
-
-    var xStart = (500 - map[0].length * (settings.GRID_SIZE)) / 2;
-
-    // xStart += padding - 5;
-    // this.startPos = xStart;
-    //console.log("xStart " , xStart);
-
 
     for (var i = 0; i < map.length; i++) {
 
