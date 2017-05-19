@@ -56,42 +56,16 @@ window.onload = function() {
   // testing server request
 
 
+
   utility.getElement("preloader").innerHTML = "Loading help commands...";
   utility.getElement("preloader").style.display = "block";
 
-  $.getJSON("https://cors-anywhere.herokuapp.com/fhdhaidari.com/clih/help.php", function(result) {
 
-    //console.log("Result === " , result[0]["right"]);
-
-    var key = Object.keys(result[0]);
-
-    //console.log("Key 1 " , key[1]);
-
-    var separator = "";
-
-    for (var i = 0; i < Object.keys(result[0]).length; i++) {
-      if(i > 0) separator = " : ";
-      helpCommands.push(key[i] + separator + result[0][key[i]]);
-    }
-
-    //console.log(helpCommands.toString());
-    utility.getElement("preloader").style.display = "none";
-    //anim.fadeOut("preloader");
-
-  });
-
-  ////////////////////////////
-
-  // // creating the particles
-  // for (var i = 0; i < numParticles; i += 1) {
-  //   // particles.push(particle.create(200, 200, Math.random() * maxSpeed + 2, Math.random() * Math.PI * 2));
-  //   particles[i] = particle.create(200, 200, Math.random() * maxSpeed + 2, Math.random() * Math.PI * 2);
-  //
-  // }
+  loadHelpCommands();
 
   addParticles();
-  // addWeatherParticles();
-  // calculateHealth();
+
+
 
   var moveLeft = function() {
     sound.playWhip();
@@ -167,7 +141,7 @@ window.onload = function() {
 
   var history = function() {
     addNewInput("History-");
-    lineIndex ++;
+    lineIndex++;
     for (var i = 0; i < command.history().length + 1; i++) {
       addNewInput(command.history()[i]);
       lineIndex++;
@@ -199,6 +173,27 @@ window.onload = function() {
   addNewInput();
 
 
+  function loadHelpCommands() {
+
+    $.getJSON("https://cors-anywhere.herokuapp.com/fhdhaidari.com/clih/help.php", function(result) {
+
+      //console.log("Result === " , result[0]["right"]);
+
+      var key = Object.keys(result[0]);
+
+      var separator = "";
+
+      for (var i = 0; i < Object.keys(result[0]).length; i++) {
+        if (i > 0) separator = " : ";
+        helpCommands.push(key[i] + separator + result[0][key[i]]);
+      }
+
+      utility.getElement("preloader").style.display = "none";
+
+    });
+  }
+
+
   function addParticles() {
     for (var i = 0; i < numParticles; i += 1) {
       // particles.push(particle.create(200, 200, Math.random() * maxSpeed + 2, Math.random() * Math.PI * 2));
@@ -207,7 +202,7 @@ window.onload = function() {
     }
   }
 
-  function addWeatherParticles () {
+  function addWeatherParticles() {
     for (var i = 0; i < 40; i += 1) {
       var obj = {
         x: i * 40,
@@ -216,14 +211,6 @@ window.onload = function() {
         yVel: Math.random() * 10
       };
       weatherParticles.push(obj);
-    }
-  }
-
-  function calculateHealth() {
-    for (var i = 0; i < factory.brickArray.length; i++) {
-      if (factory.brickArray[i].isActive) {
-        health++;
-      }
     }
   }
 
@@ -303,21 +290,6 @@ window.onload = function() {
 
   }
 
-  function updateInsanelMode() {
-
-    if (insaneMode) {
-      statusMode = "INSANE";
-      clearEffectCounter += 5;
-      if (clearEffectCounter > canvas.width) {
-        clearEffectCounter = 0;
-      }
-    } else {
-      statusMode = "SANE";
-      // clearEffectCounter = canvas.width;
-    }
-
-  }
-
   function draw() {
 
     clearEffectCounter += 10;
@@ -356,25 +328,25 @@ window.onload = function() {
       canvas.context.strokeRect(p.position.getX(), p.position.getY(), 2, 2);
       canvas.context.fill();
 
-  //   }
-  //   countUpdateWeatherParticle ++;
-  //   if(countUpdateWeatherParticle > 4) {
-  //   for (var j = 0; j < weatherParticles.length; j++) {
-  //     var weatherParticle = weatherParticles[j];
-  //     // weatherParticle.update();
-  //     canvas.context.strokeStyle = "#DDDDDD"
-  //     weatherParticle.x = utility.getRandomRange(500, 20);
-  //
-  //     weatherParticle.y = utility.getRandomRange(500, 20);
-  //
-  //     canvas.context.strokeRect(weatherParticle.x, weatherParticle.y, 6, 6);
-  //
-  //     canvas.context.fill();
-  //
-  //   }
-  //   countUpdateWeatherParticle = 0;
+      //   }
+      //   countUpdateWeatherParticle ++;
+      //   if(countUpdateWeatherParticle > 4) {
+      //   for (var j = 0; j < weatherParticles.length; j++) {
+      //     var weatherParticle = weatherParticles[j];
+      //     // weatherParticle.update();
+      //     canvas.context.strokeStyle = "#DDDDDD"
+      //     weatherParticle.x = utility.getRandomRange(500, 20);
+      //
+      //     weatherParticle.y = utility.getRandomRange(500, 20);
+      //
+      //     canvas.context.strokeRect(weatherParticle.x, weatherParticle.y, 6, 6);
+      //
+      //     canvas.context.fill();
+      //
+      //   }
+      //   countUpdateWeatherParticle = 0;
+    }
   }
-}
 
   function drawEntities() {
 
@@ -399,13 +371,13 @@ window.onload = function() {
 
     // if (isHeroOutOfBorders()) {
 
-    if(hero.x  > 500) {
+    if (hero.x > 500) {
       hero.x = 0;
     }
-    if(hero.x < -20) {
+    if (hero.x < -20) {
       hero.x = 500
     }
-      // xSpeed *= -1;
+    // xSpeed *= -1;
     // }
 
     if (hero.y > hero.originY) { // if hero exceeds the ground-level put on ground.
@@ -457,40 +429,6 @@ window.onload = function() {
   }
   //////////////////////////////////////////////////////////////////
 
-  function checkCollisionBetweenEnemyAndBase() {
-    for (var i = 0; i < factory.enemiesArray.length; i++) {
-
-      enemy = factory.enemiesArray[i];
-      _width = settings.gridSize;
-
-      if (enemy.isActive && !enemy.isHit) {
-
-        for (var j = 0; j < factory.brickArray.length; j++) {
-
-          var basePart = factory.brickArray[j];
-
-          if (basePart.isActive && !basePart.removed) {
-
-            if (basePart.x < enemy.x + _width && basePart.x + _width > enemy.x &&
-              basePart.y < enemy.y + _width && basePart.y + _width > enemy.y) {
-
-              // console.log("There is a collision, with the base ");
-              return [true, enemy, basePart];
-
-            }
-
-          }
-
-        }
-      }
-
-    }
-
-    return [false, null, null];
-
-  }
-
-
 
   function isEnemyReachedBottom() {
 
@@ -535,7 +473,6 @@ window.onload = function() {
         slowCounter = 0;
 
         heroEnemyCollisionResult = checkCollisionBetweenHeroAndEnemy();
-        // enemyBaseCollisionResult = checkCollisionBetweenEnemyAndBase();
 
         if (heroEnemyCollisionResult[0]) {
           var enemy = heroEnemyCollisionResult[1];
@@ -544,9 +481,6 @@ window.onload = function() {
 
           timeToResetMessage = 100;
           consoleMessage = messages[Math.floor((Math.random() * 4 - 0) + 0)];
-          //    enemy.isHit = true;
-          //  enemy.hit(40);
-
 
           for (var j = 0; j < numParticles; j++) {
             if (particles[i]) {
@@ -557,27 +491,22 @@ window.onload = function() {
 
           particles = [];
           for (var i = 0; i < numParticles; i += 1) {
-            // particles.push(particle.create(200, 200, Math.random() * maxSpeed + 2, Math.random() * Math.PI * 2));
             particles[i] = particle.create(enemy.x, enemy.y, Math.random() * maxSpeed + 2, Math.random() * Math.PI * 2);
-
           }
 
           sound.playHit();
           var rndm = Math.floor((Math.random() * 500) + 40);
-          //output.push( rndm = rndm - (rndm % multiplier) );
 
           canvas.context.strokeStyle = "#111111";
-          rndm = rndm - (rndm % settings.GRID_SIZE)
-          // enemy.x =  Math.floor(Math.random() * (560 - 0)) + 0;
+          rndm = rndm - (rndm % settings.GRID_SIZE);
           enemy.x = rndm;
           enemy.y = 0;
           anim.shake(utility.getElement("canvas"));
-          EnemyManager.advance();
 
         }
 
         enemyBaseCollisionResult = isEnemyReachedBottom();
-        //if (enemyBaseCollisionResult[0]) {
+
         if (enemyBaseCollisionResult) {
           var enemy = enemyBaseCollisionResult[1];
 
@@ -594,7 +523,6 @@ window.onload = function() {
           EnemyManager.removeEnemies();
           consoleMessage = "You lose. Type the 'reset' command to replay";
           isGameOver = true;
-          //global.time = 0;
         }
 
         if (gameState == 1 && !isGameOver) {
@@ -603,18 +531,16 @@ window.onload = function() {
             global.time++;
             countToUpdateTime = 0;
           }
-          // global.score ++;
+
         }
 
-        //updateInsanelMode();
-
         if (isAttack) {
-          // console.log("attacking");
+
           ySpeed = (targetY - hero.y) * 0.1;
           if (hero.y - targetY < 1) {
             isAttack = false;
             ySpeed = 5;
-            //xSpeed = 0;
+
           }
         }
       }
@@ -636,15 +562,9 @@ window.onload = function() {
   }
 
   function updateTexts() {
-
-    // utility.getElement("score-txt").innerHTML = "Score " + global.score;
-    // utility.getElement("score-txt").innerHTML = "Score: " + Math.round(global.time / 100);
-
     utility.getElement("max-time-txt").innerHTML = "High Score: " + maxTimeReached;
     utility.getElement("score-txt").innerHTML = "Score: " + global.time;
-    // utility.getElement("base-health-text").innerHTML = "Health: " + health;
     utility.getElement("console").innerHTML = consoleMessage;
-    // utility.getElement("status-txt").innerHTML = "Mode: " + statusMode;
   }
 
   $(document).keydown(function(event) {
@@ -688,18 +608,12 @@ window.onload = function() {
       currentString = "";
       currentString = inputs[lineIndex].value.trim();
 
-      //if (currentString.trim() != "history") {
-
       command.historyList.push(currentString);
-      //}
-
-      // console.log("current string ", currentString);
 
       addNewInput();
       lineIndex++;
 
       if (command.checkCommand(currentString)) {
-        // console.log("Yes, this command does exist");
         command[currentString]();
       } else {
         inputs[lineIndex].value = "Command " + "'" + currentString + "'" + " cannot be found";
@@ -708,10 +622,6 @@ window.onload = function() {
       }
 
       if (currentString.trim() == "history") {
-        // inputs[lineIndex].value = "History: " + command.history();
-        // addNewInput();
-        // lineIndex++;
-
         history();
       }
 

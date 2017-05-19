@@ -1,7 +1,5 @@
 const EnemyManager = {
 
-  multiplier: 0,
-  moveDelay: 0,
   numActiveEnemies: 3,
   enemyIndex: 0,
 
@@ -25,10 +23,8 @@ const EnemyManager = {
 
   update: function() {
     for (var i = 0; i < this.numActiveEnemies; i++) {
-      this.moveDelay++;
       var enemy = factory.enemiesArray[i];
       enemy.update();
-
     }
   }
 }
