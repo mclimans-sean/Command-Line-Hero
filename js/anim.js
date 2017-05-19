@@ -26,7 +26,7 @@ var anim = {
       element.style.opacity = op;
       element.style.filter = 'alpha(opacity=' + op * 1000 + ")";
       op += 0.1;
-    }, 50);
+    }, 100);
   },
 
   shake: function(element) {

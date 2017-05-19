@@ -6,15 +6,17 @@ const EnemyManager = {
 
     for (var i = 0; i < this.numActiveEnemies; i++) {
       let enemy = factory.enemiesArray[i];
-      enemy.add();
+
       var rndm = Math.floor((Math.random() * 500) + settings.GRID_SIZE);
       rndm = rndm - (rndm % settings.GRID_SIZE)
       enemy.x = rndm;
-      enemy.y = 0;
+      enemy.y = -200;
+      enemy.add(rndm, -80);
+
     }
   },
 
-  removeEnemies : function () {
+  removeEnemies: function() {
     for (var i = 0; i < factory.enemiesArray.length; i++) {
       factory.enemiesArray[i].isActive = false;
     }

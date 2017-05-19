@@ -215,6 +215,7 @@ window.onload = function() {
   function start() {
     setupHighScore();
     // console.log("High-Score ", localStorage.highScore);
+    
     anim.fadeIn();
     gameState = 1;
     sound.playMusic();
