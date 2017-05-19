@@ -23,7 +23,7 @@ var slowCounter = 0;
 var slowOffset = 0;
 var gameState = 1;
 var speed = 1;
-const FRICTION = 0.94;
+const FRICTION = 0.95;
 var inputs = [];
 var isAttack = false;
 var originY = 0;
@@ -63,13 +63,15 @@ window.onload = function() {
 
     //console.log("Result === " , result[0]["right"]);
 
-
     var key = Object.keys(result[0]);
 
     //console.log("Key 1 " , key[1]);
 
+    var separator = "";
+
     for (var i = 0; i < Object.keys(result[0]).length; i++) {
-      helpCommands.push(key[i] + " : " + result[0][key[i]]);
+      if(i > 0) separator = " : ";
+      helpCommands.push(key[i] + separator + result[0][key[i]]);
     }
 
     //console.log(helpCommands.toString());
@@ -77,7 +79,6 @@ window.onload = function() {
     //anim.fadeOut("preloader");
 
   });
-
 
   ////////////////////////////
 
@@ -648,8 +649,8 @@ window.onload = function() {
 
   $(document).keydown(function(event) {
 
-    sound.playTyping();
-    
+    // sound.playTyping();
+
     if (event.keyCode == 9) { // tab pressed
       event.preventDefault();
 

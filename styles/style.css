@@ -121,7 +121,7 @@ input {
 
 .terminal {
   position: fixed;
-  width: 200px;
+  width: 300px;
   height: 520px;
   left: 20px;
   margin: 10px auto;
@@ -140,7 +140,7 @@ input {
 .terminalInput {
   /*position: relative;*/
   /*float: left;*/
-  width: 100px;
+  width: 290px;
   height: 20px;
   margin-left: 10px;
   margin-top: -20px;
