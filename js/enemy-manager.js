@@ -1,7 +1,6 @@
 const EnemyManager = {
 
   numActiveEnemies: 3,
-  enemyIndex: 0,
 
   setup: function() {
 
