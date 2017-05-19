@@ -46,26 +46,15 @@ var countUpdateWeatherParticle = 0;
 
 window.onload = function() {
 
-  // factory.createGridEntities();
   factory.createBricks();
-  //  factory.createCoins();
   factory.createEnemies();
   canvas.init();
   levelManager.buildStage(stages[0]);
-
-  // testing server request
-
-
-
   utility.getElement("preloader").innerHTML = "Loading help commands...";
   utility.getElement("preloader").style.display = "block";
 
-
   loadHelpCommands();
-
   addParticles();
-
-
 
   var moveLeft = function() {
     sound.playWhip();
@@ -126,10 +115,6 @@ window.onload = function() {
     }
   }
 
-  // var attack = function() {
-  //   attack = true;
-  // }
-
   var help = function() {
     addNewInput("Help-");
     lineIndex++;
@@ -177,8 +162,6 @@ window.onload = function() {
 
     $.getJSON("https://cors-anywhere.herokuapp.com/fhdhaidari.com/clih/help.php", function(result) {
 
-      //console.log("Result === " , result[0]["right"]);
-
       var key = Object.keys(result[0]);
 
       var separator = "";
@@ -196,7 +179,6 @@ window.onload = function() {
 
   function addParticles() {
     for (var i = 0; i < numParticles; i += 1) {
-      // particles.push(particle.create(200, 200, Math.random() * maxSpeed + 2, Math.random() * Math.PI * 2));
       particles[i] = particle.create(-400, -400, Math.random() * maxSpeed + 2, Math.random() * Math.PI * 2);
 
     }
@@ -234,31 +216,20 @@ window.onload = function() {
   }
 
   function start() {
-
     setupHighScore();
-
-    console.log("High-Score ", localStorage.highScore);
+    // console.log("High-Score ", localStorage.highScore);
     anim.fadeIn();
     gameState = 1;
     sound.playMusic();
-
-    //   setTimeout(function() {
-    //      requestAnimationFrame(update);
-    //      // Drawing code goes here
-    //  }, 0 / 60);
-    //
-
-    //update();
     timer = setInterval(update, settings.TIME_DELAY);
   }
 
   function addNewInput(_text) {
 
     var fontColor = "#444444";
+
     if (lineIndex > 0) {
       inputs[lineIndex].disabled = true;
-
-      // console.log("input disabled");
     }
 
     if (_text == undefined) {
@@ -350,13 +321,8 @@ window.onload = function() {
 
   function drawEntities() {
 
-    for (var i = 0; i < factory.brickArray.length; i++) {
-      // factory.gridArray[i].draw();
+    for (var i = 0; i < factory.brickArray.length; i++) { // You can use brickArray.length + enemiesArray.length, but make sure that index is not null
 
-      // if (factory.coinsArray[i] != null) {
-      //   factory.coinsArray[i].draw();
-      // }
-      //
       if (factory.brickArray[i] != null) {
         factory.brickArray[i].draw(insaneMode);
       }
@@ -369,16 +335,12 @@ window.onload = function() {
 
   function updateHeroPosition() {
 
-    // if (isHeroOutOfBorders()) {
-
     if (hero.x > 500) {
       hero.x = 0;
     }
     if (hero.x < -20) {
       hero.x = 500
     }
-    // xSpeed *= -1;
-    // }
 
     if (hero.y > hero.originY) { // if hero exceeds the ground-level put on ground.
       hero.y = hero.originY;
@@ -387,7 +349,6 @@ window.onload = function() {
     }
 
     xSpeed *= FRICTION;
-    //ySpeed *= FRICTION;
     hero.x += xSpeed;
     hero.y += ySpeed;
 
