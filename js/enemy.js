@@ -24,12 +24,11 @@ function Enemy() {
   this.ySpeed = 0;
   this.speedLimit = 2;
 
-
   this.draw = function(change_color = false) {
     if (this.isActive) {
       this.indexColor = 0;
       canvas.context.save();
-      canvas.context.fillStyle = this.color;
+      canvas.context.strokeStyle = this.color;
       canvas.context.strokeRect(this.x, this.y, this.width / 1.5, this.height);
       canvas.context.stroke();
     }

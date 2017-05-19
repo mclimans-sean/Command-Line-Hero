@@ -165,7 +165,7 @@ window.onload = function() {
     var separator = "";
 
     for (var i = 0; i < Object.keys(result[0]).length; i++) {
-      if (i > 0) separator = " : ";
+      if (i > 1) separator = " : ";
       helpCommands.push(key[i] + separator + result[0][key[i]]);
     }
 
@@ -260,7 +260,7 @@ window.onload = function() {
 
   function draw() {
 
-    clearEffectCounter += 10;
+    clearEffectCounter += 20;
     if (clearEffectCounter >= canvas.width) {
       clearEffectCounter = 0;
     }
@@ -452,7 +452,7 @@ window.onload = function() {
           }
 
           sound.playHit();
-          var rndm = Math.floor((Math.random() * 500) + 40);
+          var rndm = Math.floor((Math.random() * 500) + settings.GRID_SIZE);
 
           canvas.context.strokeStyle = "#111111";
           rndm = rndm - (rndm % settings.GRID_SIZE);
