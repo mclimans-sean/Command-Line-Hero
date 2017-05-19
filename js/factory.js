@@ -10,7 +10,7 @@ var factory = {
     }
   },
 
-  createEnemies: function (numberOfEnemies = 4) {
+  createEnemies: function (numberOfEnemies = 8) {
     for (var i = 0; i < numberOfEnemies; i++) {
       var enemy = new Enemy();
       this.enemiesArray.push(enemy);

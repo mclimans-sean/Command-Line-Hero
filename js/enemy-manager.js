@@ -1,10 +1,10 @@
 const EnemyManager = {
 
-  numActiveEnemies: 3,
+  numActiveEnemies: 5,
 
   setup: function() {
 
-    for (var i = 0; i < 3; i++) {
+    for (var i = 0; i < this.numActiveEnemies; i++) {
       let enemy = factory.enemiesArray[i];
       enemy.add();
       var rndm = Math.floor((Math.random() * 500) + settings.GRID_SIZE);
