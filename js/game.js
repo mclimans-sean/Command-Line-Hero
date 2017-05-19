@@ -53,7 +53,11 @@ window.onload = function() {
   utility.getElement("preloader").innerHTML = "Loading help commands...";
   utility.getElement("preloader").style.display = "block";
 
-  loadHelpCommands();
+
+  // use the HTTPRequest object to load help commands
+  HTTPRequest.get("fhdhaidari.com/clih/help.php").then(loadHelpCommands);
+
+  //loadHelpCommands();
   addParticles();
 
   var moveLeft = function() {
@@ -70,14 +74,9 @@ window.onload = function() {
     xSpeed = 10;
   }
 
-  var moveUp = function() {
-    //sound.playWhip();
-    //ySpeed = -1;
-  }
-
   var moveDown = function() {
     sound.playWhip();
-    ySpeed = 10;
+    ySpeed = 40;
   }
 
   var pause = function() {
@@ -158,21 +157,19 @@ window.onload = function() {
   addNewInput();
 
 
-  function loadHelpCommands() {
+  function loadHelpCommands(result) {
 
-    var httpRequest = HTTPRequest.get("fhdhaidari.com/clih/help.php");
-    httpRequest.then(function(result) {
+    // var httpRequest = HTTPRequest.get("fhdhaidari.com/clih/help.php");
 
-      var key = Object.keys(result[0]);
-      var separator = "";
+    var key = Object.keys(result[0]);
+    var separator = "";
 
-      for (var i = 0; i < Object.keys(result[0]).length; i++) {
-        if (i > 0) separator = " : ";
-        helpCommands.push(key[i] + separator + result[0][key[i]]);
-      }
+    for (var i = 0; i < Object.keys(result[0]).length; i++) {
+      if (i > 0) separator = " : ";
+      helpCommands.push(key[i] + separator + result[0][key[i]]);
+    }
 
-      utility.getElement("preloader").style.display = "none";
-    });
+    utility.getElement("preloader").style.display = "none";
 
   }
 
@@ -399,7 +396,7 @@ window.onload = function() {
 
       if (enemy.isActive && !enemy.isHit) {
 
-        if (enemy.y > 480) {
+        if (enemy.y > 500) {
           return true;
         }
       }
@@ -417,7 +414,6 @@ window.onload = function() {
   }
 
   function update() {
-
 
     if (gameState == 1) {
       draw(); // always draw, Pablo Picasso ;)
@@ -440,7 +436,7 @@ window.onload = function() {
           //EnemyManager.advance();
           enemy.advance();
 
-          timeToResetMessage = 100;
+          timeToResetMessage = 200;
           consoleMessage = messages[Math.floor((Math.random() * 4 - 0) + 0)];
 
           for (var j = 0; j < numParticles; j++) {
@@ -470,6 +466,7 @@ window.onload = function() {
 
         if (enemyBaseCollisionResult) {
           var enemy = enemyBaseCollisionResult[1];
+          anim.shake();
 
           if (health > 0) {
             health--;

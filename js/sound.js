@@ -5,7 +5,7 @@ var sound = {
   whipSoundPath: "assets/sounds/whip.wav",
   winSoundPath: "assets/sounds/win.wav",
   insaneSoundPath: "assets/sounds/crazy.mp3",
-  histSoundPath: "assets/sounds/hit.wav",
+  histSoundPath: "assets/sounds/hit2.wav",
   musicPath: "assets/sounds/music.wav",
   slowMusicPath: "assets/sounds/slowmusic.mp3",
   typeSoundPath: "assets/sounds/type.wav",
@@ -41,7 +41,7 @@ var sound = {
   },
 
   playMusic: function() {
-    this.soundTrack = new Audio(this.slowMusicPath);
+    this.soundTrack = new Audio(this.musicPath);
     this.soundTrack.addEventListener('ended', function() {
       this.currentTime = 0;
       this.loop = true;
