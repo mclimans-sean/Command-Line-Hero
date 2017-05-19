@@ -160,10 +160,10 @@ window.onload = function() {
 
   function loadHelpCommands() {
 
-    $.getJSON("https://cors-anywhere.herokuapp.com/fhdhaidari.com/clih/help.php", function(result) {
+    var httpRequest = HTTPRequest.get("fhdhaidari.com/clih/help.php");
+    httpRequest.then(function(result) {
 
       var key = Object.keys(result[0]);
-
       var separator = "";
 
       for (var i = 0; i < Object.keys(result[0]).length; i++) {
@@ -172,8 +172,8 @@ window.onload = function() {
       }
 
       utility.getElement("preloader").style.display = "none";
-
     });
+
   }
 
 
